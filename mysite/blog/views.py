@@ -46,6 +46,7 @@ class PostListView(ListView):
     paginate_by = 3
     template_name = 'blog/post/list.html'
 
+
 def post_share(request, post_id):
     # Retrieve post by id
     post = get_object_or_404(Post, id=post_id, \
@@ -53,10 +54,10 @@ def post_share(request, post_id):
     sent = False
 
     if request.method == 'POST':
-        # Form was submitted
+        # Форма передана на обработку
         form = EmailPostForm(request.POST)
         if form.is_valid():
-            # Form fields passed validation
+            # Поля формы прошли валидацию
             cd = form.cleaned_data
             post_url = request.build_absolute_uri(post.get_absolute_url())
             subject = f"{cd['name']} recommends you read " \
