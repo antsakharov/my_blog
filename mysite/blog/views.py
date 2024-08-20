@@ -55,7 +55,7 @@ class PostListView(ListView):
 
 
 def post_share(request, post_id):
-    # Retrieve post by id
+    # Получить сообщение по идентификатору
     post = get_object_or_404(Post, id=post_id, \
                                    status=Post.Status.PUBLISHED)
     sent = False
