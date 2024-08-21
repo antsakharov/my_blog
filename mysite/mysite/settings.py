@@ -1,10 +1,17 @@
+import os
+from dotenv import load_dotenv
 from pathlib import Path
+
+
+
+# Загрузка переменных окружения
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ot@1m1n&nfmj^w_2jhzpzan9du@svf02a5z4s9$(s^oyi7njsg'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -62,12 +69,29 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Получаем имя пользователя из переменных окружения
+pg_user = os.getenv('PG_USER', None)
+# Получаем пароль из переменных окружения
+pg_password = os.getenv('PG_PASSWORD', None)
+
+if pg_user and pg_password:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': pg_user,
+            'PASSWORD': pg_password,
+            'HOST': os.getenv('DB_HOST', 'localhost'),  # Дополнительная настройка хоста
+            'PORT': os.getenv('DB_PORT', '5432'),  # Дополнительная настройка порта
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
