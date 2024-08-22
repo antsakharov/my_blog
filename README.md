@@ -37,7 +37,9 @@
 
 1. **Скачать репозиторий**
 
-   [Используйте команду `git clone` для клонирования репозитория на ваш локальный компьютер.](https://github.com/antsakharov/my_blog/tree/main)
+   ```csharp 
+   git clone git@github.com:antsakharov/my_blog.git
+   ```
 
 2. **Создать виртуальное окружение**
 
