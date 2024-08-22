@@ -69,29 +69,17 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# Получаем имя пользователя из переменных окружения
-pg_user = os.getenv('PG_USER', None)
-# Получаем пароль из переменных окружения
-pg_password = os.getenv('PG_PASSWORD', None)
 
-if pg_user and pg_password:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': pg_user,
-            'PASSWORD': pg_password,
-            'HOST': os.getenv('DB_HOST', 'localhost'),  # Дополнительная настройка хоста
-            'PORT': os.getenv('DB_PORT', '5432'),  # Дополнительная настройка порта
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('NAME'),
+        'USER': os.getenv('USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('HOST', 'localhost'),  # Дополнительная настройка хоста
+        'PORT': os.getenv('PORT', '5432'),  # Дополнительная настройка порта
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 
 # Password validation
