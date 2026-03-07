@@ -38,7 +38,7 @@
 1. **Скачать репозиторий**
 
    ```csharp 
-   git clone git@github.com:antsakharov/my_blog.git
+   git clone git@github.com:antsakharov/my-blog.git
    ```
 
 2. **Создать виртуальное окружение**
